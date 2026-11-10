@@ -4,3 +4,4 @@ __pycache__/
 .gradio/
 eval/answers.csv
 test.pdf
+check.py
