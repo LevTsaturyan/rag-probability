@@ -12,7 +12,9 @@ class Chunk:
 
 
 def split_sentences(text):
-    return [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", text) if s.strip()]
+    text = re.sub(r"(\w)-\n(\w)", r"\1\2", text)   
+    text = re.sub(r"\s+", " ", text)               
+    return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
 
 
 def make_chunks(pages, max_chars=config.MAX_CHARS, overlap_sents=config.OVERLAP_SENTS):
