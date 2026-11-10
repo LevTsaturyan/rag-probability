@@ -1,8 +1,9 @@
-EMBED_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
+EMBED_MODEL = "BAAI/bge-m3"
+EMBED_MAX_LEN = 512
 LLM_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
-MAX_CHARS = 600        # максимальная длина фрагмента
-OVERLAP_SENTS = 1      # сколько предложений повторять между фрагментами
+MAX_CHARS = 1000        # максимальная длина фрагмента
+OVERLAP_SENTS = 1     
 TOP_K = 5              # сколько фрагментов отдавать модели
-THRESHOLD = 0.46       # ниже этого сходства отвечаем "нет в тексте"
+THRESHOLD = 0.52      
 MAX_NEW_TOKENS = 700
 NO_ANSWER = "В загруженных документах этого нет."

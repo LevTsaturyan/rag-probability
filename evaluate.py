@@ -41,8 +41,8 @@ def retrieval_metrics(retriever, questions, k=5):
     return sum(r is not None for r in ranks) / len(ranks), float(np.mean([1 / r if r else 0 for r in ranks]))
 
 
-def search_table(embed):
-    questions = [q for q in load_questions("test") if q["answerable"]]
+def search_table(embed, split):
+    questions = [q for q in load_questions(split) if q["answerable"]]
     pages = load_pages()
     print("| Режим | Размер фрагмента | recall@5 | MRR |\n|---|---|---|---|")
     for size in CHUNK_SIZES:
@@ -92,12 +92,16 @@ def score_answers():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=["search", "threshold", "answers", "score"])
-    command = parser.parse_args().command
+    parser.add_argument("--split", default="dev", choices=["dev", "test"])
+    args = parser.parse_args()
+    command = args.command
     if command == "score":
         return score_answers()
     from rag.retriever import load_embedder
     embed = load_embedder()
-    {"search": search_table, "threshold": tune_threshold, "answers": write_answers}[command](embed)
+    if command == "search":
+        return search_table(embed, args.split)
+    {"threshold": tune_threshold, "answers": write_answers}[command](embed)
 
 
 if __name__ == "__main__":

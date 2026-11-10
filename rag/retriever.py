@@ -19,7 +19,7 @@ def load_embedder():
     """Возвращает функцию: список строк -> нормированные векторы."""
     from sentence_transformers import SentenceTransformer
     model = SentenceTransformer(config.EMBED_MODEL)
-    model.max_seq_length = 256
+    model.max_seq_length = config.EMBED_MAX_LEN
 
     def embed(texts):
         return model.encode(list(texts), normalize_embeddings=True, convert_to_numpy=True)
