@@ -1,0 +1,10 @@
+torch==2.11.0
+sentence-transformers==6.2.0
+transformers==5.21.0
+accelerate==1.15.0
+gradio==6.31.0
+pypdf==7.0.0
+rank-bm25==0.2.2
+snowballstemmer==3.1.1
+numpy==2.5.4
+pytest==9.2.0

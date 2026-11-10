@@ -1,5 +1,5 @@
 # RAG по тексту: вопросы и ответы по документу
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LevTsaturyan/rag-probability/blob/main/rag.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LevTsaturyan/rag-probability/blob/main/notebooks/prototype.ipynb)
 ## Что это
 Система отвечает на вопросы на русском по загруженному текстовому документу. Она находит в тексте фрагменты, наиболее близкие по смыслу к вопросу, и формулирует ответ только на их основе, указывая источники. Протестирована на тексте по теории вероятностей и математической статистике (около 50 000 символов).
 
@@ -24,7 +24,7 @@
 - Проверено на одном документе.
 
 ## Как запустить
-1. Открыть `rag.ipynb` в Google Colab и включить GPU (Среда выполнения → Сменить тип → T4 GPU).
+1. Открыть `notebooks/prototype.ipynb` в Google Colab и включить GPU (Среда выполнения → Сменить тип → T4 GPU).
 2. Выполнить ячейки по порядку.
 3. Загрузить свой текстовый файл `.txt` в кодировке UTF-8 и задать вопрос в веб-интерфейсе.
 
