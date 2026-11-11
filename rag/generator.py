@@ -24,7 +24,8 @@ def load_generator(model_name=config.LLM_MODEL, load_4bit=False):
     quant = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4",
                                bnb_4bit_compute_dtype=torch.float16) if load_4bit else None
     tok = AutoTokenizer.from_pretrained(model_name)
-    llm = AutoModelForCausalLM.from_pretrained(model_name, dtype=dtype, device_map="auto", quantization_config=quant)
+    device_map = {"": 0} if load_4bit else "auto"  # 4-битная модель должна целиком лежать на видеокарте
+    llm = AutoModelForCausalLM.from_pretrained(model_name, dtype=dtype, device_map=device_map, quantization_config=quant)
 
     def generate(question, hits):
         prompt = tok.apply_chat_template(build_messages(question, hits), tokenize=False, add_generation_prompt=True)

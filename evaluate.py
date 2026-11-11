@@ -91,7 +91,6 @@ def write_answers(embed, model, load_4bit, out):
 
 def read_answers(path):
     raw = path.read_bytes()
-    # Excel мог испортить отдельные русские символы; оценки и названия колонок это не затрагивает
     text = raw.decode("utf-8-sig", errors="replace")
     header = text.splitlines()[0]
     delimiter = "\t" if "\t" in header else ";" if ";" in header else ","
@@ -125,7 +124,7 @@ def main():
     if args.command == "score":
         return score_answers(args.out)
     from rag.retriever import load_embedder
-    embed = load_embedder()
+    embed = load_embedder("cpu" if args.load_4bit else None)
     if args.command == "search":
         return search_table(embed, args.split)
     if args.command == "threshold":

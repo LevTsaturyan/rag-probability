@@ -15,10 +15,10 @@ def tokenize(text):
     return _stemmer.stemWords(re.findall(r"\w+", text.lower()))
 
 
-def load_embedder():
+def load_embedder(device=None):
     """Возвращает функцию: список строк -> нормированные векторы."""
     from sentence_transformers import SentenceTransformer
-    model = SentenceTransformer(config.EMBED_MODEL)
+    model = SentenceTransformer(config.EMBED_MODEL, device=device)
     model.max_seq_length = config.EMBED_MAX_LEN
 
     def embed(texts):
