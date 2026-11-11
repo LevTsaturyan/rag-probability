@@ -36,7 +36,12 @@ with gr.Blocks(title="Вопросы по конспектам") as demo:
     files.change(index, files, [state, status])
     question = gr.Textbox(label="Вопрос")
     button = gr.Button("Спросить", variant="primary")
-    result = gr.Textbox(label="Ответ", lines=6)
+    gr.Markdown("### Ответ")
+    result = gr.Markdown(latex_delimiters=[
+        {"left": "\\(", "right": "\\)", "display": False},  # формула в строке
+        {"left": "\\[", "right": "\\]", "display": True},   # формула отдельной строкой
+        {"left": "$$", "right": "$$", "display": True},
+    ])
     sources = gr.Textbox(label="Источники", lines=12)
     button.click(ask, [question, state], [result, sources])
 
