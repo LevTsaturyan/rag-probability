@@ -2,6 +2,6 @@
 __pycache__/
 .pytest_cache/
 .gradio/
-eval/answers.csv
+eval/answers*.csv
 test.pdf
 check.py

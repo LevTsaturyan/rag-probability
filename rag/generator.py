@@ -15,14 +15,16 @@ def build_messages(question, hits):
             {"role": "user", "content": f"Контекст:\n{context}\n\nВопрос: {question}"}]
 
 
-def load_generator():
+def load_generator(model_name=config.LLM_MODEL, load_4bit=False):
     """Возвращает функцию: (вопрос, фрагменты) -> текст ответа."""
     import torch
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
     dtype = torch.float16 if torch.cuda.is_available() else torch.float32
-    tok = AutoTokenizer.from_pretrained(config.LLM_MODEL)
-    llm = AutoModelForCausalLM.from_pretrained(config.LLM_MODEL, dtype=dtype, device_map="auto")
+    quant = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4",
+                               bnb_4bit_compute_dtype=torch.float16) if load_4bit else None
+    tok = AutoTokenizer.from_pretrained(model_name)
+    llm = AutoModelForCausalLM.from_pretrained(model_name, dtype=dtype, device_map="auto", quantization_config=quant)
 
     def generate(question, hits):
         prompt = tok.apply_chat_template(build_messages(question, hits), tokenize=False, add_generation_prompt=True)
