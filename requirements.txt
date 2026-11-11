@@ -8,3 +8,4 @@ rank-bm25==0.2.2
 snowballstemmer==3.1.1
 numpy==2.5.4
 pytest==9.2.0
+bitsandbytes==0.50.2
