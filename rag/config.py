@@ -1,6 +1,7 @@
 EMBED_MODEL = "BAAI/bge-m3"
 EMBED_MAX_LEN = 512
-LLM_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
+LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"
+LLM_4BIT = True 
 MAX_CHARS = 1000        # максимальная длина фрагмента
 OVERLAP_SENTS = 1     
 TOP_K = 5              # сколько фрагментов отдавать модели

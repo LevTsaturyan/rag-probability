@@ -5,9 +5,10 @@ from rag.generator import load_generator
 from rag.loaders import load_document
 from rag.pipeline import answer, format_sources
 from rag.retriever import Retriever, load_embedder
+from rag import config
 
-embed = load_embedder()
-generate = load_generator()
+embed = load_embedder("cpu" if config.LLM_4BIT else None)  # видеопамять целиком отдаём LLM
+generate = load_generator(config.LLM_MODEL, config.LLM_4BIT)
 
 
 def index(files):

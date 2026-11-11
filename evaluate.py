@@ -117,7 +117,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=["search", "threshold", "answers", "score"])
     parser.add_argument("--split", default="dev", choices=["dev", "test"])
-    parser.add_argument("--model", default=config.LLM_MODEL)
+    parser.add_argument("--model", default="Qwen/Qwen2.5-1.5B-Instruct")
     parser.add_argument("--4bit", dest="load_4bit", action="store_true", help="загрузить LLM в 4 битах")
     parser.add_argument("--out", type=Path, default=ANSWERS, help="файл с ответами")
     args = parser.parse_args()
